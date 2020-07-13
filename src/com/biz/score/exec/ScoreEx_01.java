@@ -18,7 +18,9 @@ public class ScoreEx_01 {
 			System.out.println("2.성적일람표 출력");
 			System.out.println("3.성적일람표 저장");
 			System.out.println("-1.업무종료");
+			System.out.println("====================================================");
 			System.out.print("업무선택>>");
+			
 			String strManu = scan.nextLine();
 			
 			int intManu = 0;

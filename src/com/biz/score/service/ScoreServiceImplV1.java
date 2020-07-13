@@ -50,7 +50,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 			System.out.println("다시 입력해 주세요.");
 			return true;
 		}
-		strNum = String.format("%05d", strNum);
+		strNum = String.format("%05d", intNum);
 		
 		for (ScoreVO scoreVO2 : scoreList) {
 			if(scoreVO.getNum().equals(strNum)) {
@@ -186,7 +186,43 @@ public class ScoreServiceImplV1 implements ScoreService {
 		try {
 			fileWriter = new FileWriter(fileListName, true);
 			printWriter = new PrintWriter(fileWriter);
-			printWriter.print(this.scoreList);
+			printWriter.println("===================================================");
+			printWriter.println("성적 리스트");
+			printWriter.println("===================================================");
+			printWriter.println("학번\t국어\t영어\t수학\t음악\t총점\t평균");
+			printWriter.println("---------------------------------------------------");
+			int intKorSum = 0;
+			int intEngSum = 0;
+			int intMathSum = 0;
+			int intMusicSum = 0;
+			for (ScoreVO scoreVO : scoreList) {
+				printWriter.print(scoreVO.getNum()+"\t");
+				printWriter.print(scoreVO.getKor()+"\t");
+				printWriter.print(scoreVO.getEng()+"\t");
+				printWriter.print(scoreVO.getMath()+"\t");
+				printWriter.print(scoreVO.getMusic()+"\t");
+				printWriter.print(scoreVO.getSum()+"\t");
+				printWriter.print(scoreVO.getAvg()+"\n");
+				
+				intKorSum += scoreVO.getKor();
+				intEngSum += scoreVO.getEng();
+				intMathSum += scoreVO.getMath();
+				intMusicSum += scoreVO.getMusic();
+			}
+			printWriter.println("---------------------------------------------------");
+			printWriter.printf("총점:\t%d\t%d\t%d\t%d\t%d\t\t\n",
+					intKorSum,
+					intEngSum,
+					intMathSum,
+					intMusicSum,
+					intKorSum+intEngSum+intMathSum+intMusicSum);
+			printWriter.printf("평균:\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\n",
+					(float)intKorSum/scoreList.size(),
+					(float)intEngSum/scoreList.size(),
+					(float)intMathSum/scoreList.size(),
+					(float)intMusicSum/scoreList.size(),
+					(float)intKorSum+intEngSum+intMathSum+intMusicSum/4);
+			printWriter.println("===================================================");
 			printWriter.flush();
 			printWriter.close();
 			
@@ -284,12 +320,13 @@ public class ScoreServiceImplV1 implements ScoreService {
 				intMathSum,
 				intMusicSum,
 				intKorSum+intEngSum+intMathSum+intMusicSum);
-		System.out.printf("평균:\t%d\t%d\t%d\t%d\t\t%f\n",
-				String.format("%5.2f", intKorSum/scoreList.size()),
-				String.format("%5.2f", intEngSum/scoreList.size()),
-				String.format("%5.2f", intMathSum/scoreList.size()),
-				String.format("%5.2f", intMusicSum/scoreList.size()),
-				String.format("%5.2f", intKorSum+intEngSum+intMathSum+intMusicSum/4));
+		System.out.printf("평균:\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\n",
+				(float)intKorSum/scoreList.size(),
+				(float)intEngSum/scoreList.size(),
+				(float)intMathSum/scoreList.size(),
+				(float)intMusicSum/scoreList.size(),
+				(float)intKorSum+intEngSum+intMathSum+intMusicSum/4);
+		System.out.println("===================================================");
 	}
 	
 }
