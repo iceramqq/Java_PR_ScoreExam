@@ -41,6 +41,8 @@ public class ScoreEx_01 {
 				sService.scoreList();
 			} else if (intManu == 3) {
 				sService.scoreListSave();
+				System.out.println("저장 했습니다. 아무버튼이나 누루세요");
+				scan.nextLine();
 			}
 		}
 		System.out.println("업무종료!!!");

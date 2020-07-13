@@ -184,7 +184,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 		PrintWriter printWriter = null;
 		
 		try {
-			fileWriter = new FileWriter(fileListName, true);
+			fileWriter = new FileWriter(fileListName);
 			printWriter = new PrintWriter(fileWriter);
 			printWriter.println("===================================================");
 			printWriter.println("성적 리스트");
