@@ -38,6 +38,8 @@ public class ScoreEx_01 {
 			if(intManu == 1) {
 				while(sService.inputScore());
 			} else if (intManu == 2) {
+				sService.scoreSum();
+				sService.scoreAvg();
 				sService.scoreList();
 			} else if (intManu == 3) {
 				sService.scoreListSave();

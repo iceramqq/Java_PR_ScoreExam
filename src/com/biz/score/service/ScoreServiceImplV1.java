@@ -52,8 +52,8 @@ public class ScoreServiceImplV1 implements ScoreService {
 		}
 		strNum = String.format("%05d", intNum);
 		
-		for (ScoreVO scoreVO2 : scoreList) {
-			if(scoreVO.getNum().equals(strNum)) {
+		for (ScoreVO scVO : scoreList) {
+			if(scVO.getNum().equals(strNum)) {
 				System.out.println("이미 등록된 학번입니다");
 				System.out.println("다시 입력해 주세요.");
 				return true;
@@ -195,6 +195,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 			int intEngSum = 0;
 			int intMathSum = 0;
 			int intMusicSum = 0;
+			float floatAvgsum = 0.0f;
 			for (ScoreVO scoreVO : scoreList) {
 				printWriter.print(scoreVO.getNum()+"\t");
 				printWriter.print(scoreVO.getKor()+"\t");
@@ -208,6 +209,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 				intEngSum += scoreVO.getEng();
 				intMathSum += scoreVO.getMath();
 				intMusicSum += scoreVO.getMusic();
+				floatAvgsum += scoreVO.getAvg();
 			}
 			printWriter.println("---------------------------------------------------");
 			printWriter.printf("총점:\t%d\t%d\t%d\t%d\t%d\t\t\n",
@@ -221,7 +223,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 					(float)intEngSum/scoreList.size(),
 					(float)intMathSum/scoreList.size(),
 					(float)intMusicSum/scoreList.size(),
-					(float)intKorSum+intEngSum+intMathSum+intMusicSum/4);
+					(float)floatAvgsum/scoreList.size());
 			printWriter.println("===================================================");
 			printWriter.flush();
 			printWriter.close();
@@ -299,6 +301,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 		int intEngSum = 0;
 		int intMathSum = 0;
 		int intMusicSum = 0;
+		float floatAvgsum = 0.0f;
 		for (ScoreVO scoreVO : scoreList) {
 			System.out.print(scoreVO.getNum()+"\t");
 			System.out.print(scoreVO.getKor()+"\t");
@@ -312,6 +315,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 			intEngSum += scoreVO.getEng();
 			intMathSum += scoreVO.getMath();
 			intMusicSum += scoreVO.getMusic();
+			floatAvgsum += scoreVO.getAvg();
 		}
 		System.out.println("---------------------------------------------------");
 		System.out.printf("총점:\t%d\t%d\t%d\t%d\t%d\t\t\n",
@@ -325,7 +329,7 @@ public class ScoreServiceImplV1 implements ScoreService {
 				(float)intEngSum/scoreList.size(),
 				(float)intMathSum/scoreList.size(),
 				(float)intMusicSum/scoreList.size(),
-				(float)intKorSum+intEngSum+intMathSum+intMusicSum/4);
+				(float)floatAvgsum/scoreList.size());
 		System.out.println("===================================================");
 	}
 	
